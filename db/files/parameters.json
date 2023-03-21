@@ -1,7 +1,20 @@
 [
-    {
-        "uid" : "0269f99e-c7d6-11ed-afa1-0242ac120002",
-        "name" : "Is ABSH?",
-        "is_critical" : 1,
-    }
+  {
+    "uid": "0269f99e-c7d6-11ed-afa1-0242ac120002",
+    "kind_uid": "b5f34fd4-c7d5-11ed-afa1-0242ac120002",
+    "name": "Is ABSH?",
+    "is_critical": true
+  },
+  {
+    "uid": "b24bf261-6d58-4bac-a3a1-cd94a2d14aec",
+    "kind_uid": "12c3a36a-80b9-4a12-a85b-9f5e9e06a880",
+    "name": "dfg",
+    "is_critical": true
+  },
+  {
+    "uid": "13844222-d648-4830-941b-dde1073e4dac",
+    "kind_uid": "5b8e71e1-c37f-4040-83dc-ba2f531379a0",
+    "name": "adfsdf",
+    "is_critical": true
+  }
 ]

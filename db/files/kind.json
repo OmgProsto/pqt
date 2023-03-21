@@ -1,1 +1,22 @@
-[{"uid": "b5f34fd4-c7d5-11ed-afa1-0242ac120002", "name": "Name", "is_basic": true}, {"uid": "12c3a36a-80b9-4a12-a85b-9f5e9e06a880", "name": "sdf", "is_basic": true}, {"uid": "5758756c-2463-4e84-b012-f44dcfda6bd5", "name": "fsdfsdf", "is_basic": true}, {"uid": "5b8e71e1-c37f-4040-83dc-ba2f531379a0", "name": "jkhbhjh", "is_basic": true}]
+[
+  {
+    "uid": "b5f34fd4-c7d5-11ed-afa1-0242ac120002",
+    "name": "Name",
+    "is_basic": true
+  },
+  {
+    "uid": "12c3a36a-80b9-4a12-a85b-9f5e9e06a880",
+    "name": "sdf",
+    "is_basic": true
+  },
+  {
+    "uid": "5758756c-2463-4e84-b012-f44dcfda6bd5",
+    "name": "fsdfsdf",
+    "is_basic": true
+  },
+  {
+    "uid": "5b8e71e1-c37f-4040-83dc-ba2f531379a0",
+    "name": "jkhbhjh",
+    "is_basic": true
+  }
+]
