@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(299)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(292)
         self.tableWidget.horizontalHeader().setMinimumSectionSize(200)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(10, 470, 151, 51))
