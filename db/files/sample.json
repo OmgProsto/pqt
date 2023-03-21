@@ -1,8 +1,1 @@
-[
-    {
-        "uid" : "29c5928c-c7d6-11ed-afa1-0242ac120002",
-        "group_uid" : "df9cfc9a-c7d5-11ed-afa1-0242ac120002",
-        "name" : "Sample 1",
-        "grade" : 2
-    }
-]
+[{"uid": "29c5928c-c7d6-11ed-afa1-0242ac120002", "group_uid": "df9cfc9a-c7d5-11ed-afa1-0242ac120002", "name": "Sample 1", "grade": 2}, {"uid": "3e67063f-23e2-4838-8bf2-e176db827892", "group_uid": "df9cfc9a-c7d5-11ed-afa1-0242ac120002", "name": "sdf", "grade": 0}, {"uid": "7951a612-51af-40f1-b95e-f212c74b636b", "group_uid": "9b2be692-f950-482d-a1a3-11d1f335fd32", "name": "fewrt3425", "grade": 0}]
