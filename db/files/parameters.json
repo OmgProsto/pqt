@@ -3,7 +3,7 @@
     "uid": "0269f99e-c7d6-11ed-afa1-0242ac120002",
     "kind_uid": "b5f34fd4-c7d5-11ed-afa1-0242ac120002",
     "name": "Is ABSH?",
-    "is_critical": true
+    "is_critical": false
   },
   {
     "uid": "b24bf261-6d58-4bac-a3a1-cd94a2d14aec",
@@ -15,6 +15,12 @@
     "uid": "13844222-d648-4830-941b-dde1073e4dac",
     "kind_uid": "5b8e71e1-c37f-4040-83dc-ba2f531379a0",
     "name": "adfsdf",
+    "is_critical": true
+  },
+  {
+    "uid": "8a4c9adb-6b12-426c-8a00-157d11c14f79",
+    "kind_uid": "b5f34fd4-c7d5-11ed-afa1-0242ac120002",
+    "name": "ggj",
     "is_critical": true
   }
 ]

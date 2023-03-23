@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 
+from src.GradeKindWin import GradeKindWin
 from src.GroupWin import GroupWin
 from src.KindWin import KindWin
 from src.ParametersWin import ParametersWin
@@ -19,6 +20,7 @@ class MainWin(QtWidgets.QMainWindow):
         self.mw.pushButton_2.clicked.connect(self.paramsButtonClicked)
         self.mw.pushButton_3.clicked.connect(self.groupButtonClicked)
         self.mw.pushButton_4.clicked.connect(self.sampleButtonClicked)
+        self.mw.pushButton_5.clicked.connect(self.gradeKindClicked)
 
     def kindButtonClicked(self):
         self.kindWin = KindWin()
@@ -35,3 +37,7 @@ class MainWin(QtWidgets.QMainWindow):
     def sampleButtonClicked(self):
         self.sampleWin = SampleWin()
         self.sampleWin.show()
+
+    def gradeKindClicked(self):
+        self.gradeKindWin = GradeKindWin()
+        self.gradeKindWin.show()

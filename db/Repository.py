@@ -28,6 +28,7 @@ class Group:
         self.name = name
         self.is_basic = is_basic
 
+
 class Sample:
     def __init__(self, uid: str, groupUid: str, name: str, grade: int):
         self.uid = uid
@@ -35,10 +36,10 @@ class Sample:
         self.name = name
         self.grade = grade
 
+
 class Repository:
     def getAllKinds(self):
-        with open(DIR_KIND, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_KIND)
 
         kinds = []
 
@@ -50,8 +51,7 @@ class Repository:
         return kinds
 
     def createKind(self, kind: Kind):
-        with open(DIR_KIND, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_KIND)
 
         text.append({
             "uid": kind.uid,
@@ -59,12 +59,10 @@ class Repository:
             "is_basic": kind.is_basic
         })
 
-        with open(DIR_KIND, "w") as file:
-            file.write(json.dumps(text))
+        self.setData(DIR_KIND, text)
 
     def getAllParams(self):
-        with open(DIR_PARAMETERS, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_PARAMETERS)
 
         parameters = []
 
@@ -76,8 +74,7 @@ class Repository:
         return parameters
 
     def createParam(self, param: Parameter):
-        with open(DIR_PARAMETERS, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_PARAMETERS)
 
         text.append({
             "uid": param.uid,
@@ -86,12 +83,10 @@ class Repository:
             "is_critical": param.is_critical
         })
 
-        with open(DIR_PARAMETERS, "w") as file:
-            file.write(json.dumps(text))
+        self.setData(DIR_PARAMETERS, text)
 
     def getAllGroup(self):
-        with open(DIR_GROUP, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_GROUP)
 
         groups = []
 
@@ -103,8 +98,7 @@ class Repository:
         return groups
 
     def createGroup(self, group: Group):
-        with open(DIR_GROUP, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_GROUP)
 
         text.append({
             "uid": group.uid,
@@ -113,12 +107,10 @@ class Repository:
             "is_basic": group.is_basic
         })
 
-        with open(DIR_GROUP, "w") as file:
-            file.write(json.dumps(text))
+        self.setData(DIR_GROUP, text)
 
     def getAllSample(self):
-        with open(DIR_SAMPLE, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_SAMPLE)
 
         samples = []
 
@@ -130,8 +122,7 @@ class Repository:
         return samples
 
     def createSample(self, group: Sample):
-        with open(DIR_SAMPLE, 'r', encoding='utf-8') as f:
-            text = json.load(f)
+        text = self.getData(DIR_SAMPLE)
 
         text.append({
             "uid": group.uid,
@@ -140,5 +131,120 @@ class Repository:
             "grade": group.grade
         })
 
-        with open(DIR_SAMPLE, "w") as file:
+        self.setData(DIR_SAMPLE, text)
+
+    def delSample(self, uidSample: str):
+        text = self.getAllSample()
+
+        for index, sample in enumerate(text):
+            if sample.uid == uidSample:
+                del text[index]
+
+        saveData = []
+
+        for s in text:
+            saveData.append({
+                "uid": s.uid,
+                "group_uid": s.groupUid,
+                "name": s.name,
+                "grade": s.grade
+            })
+
+        self.setData(DIR_SAMPLE, saveData)
+
+    def getParametersBySampleUid(self, uid: str):
+
+        allSamples = self.getAllSample()
+
+        groupUid = None
+
+        for sample in allSamples:
+            if sample.uid == uid:
+                groupUid = sample.groupUid
+                break
+
+        if groupUid is None:
+            return []
+
+        groups = self.getAllGroup()
+
+        kindUid = None
+
+        for group in groups:
+            if group.uid == groupUid:
+                kindUid = group.kindUid
+
+        if kindUid is None:
+            return []
+
+        parameters = self.getAllParams()
+
+        resultParameters = []
+
+        for parameter in parameters:
+            if parameter.kindUid == kindUid:
+                resultParameters.append(parameter)
+
+        return resultParameters
+
+
+    def isParameterCritical(self, parameterUid: str):
+        parameters = self.getAllParams()
+
+        for param in parameters:
+            if param.uid == parameterUid:
+                return param.is_critical
+
+        return False
+
+    def updateGradeSample(self, sampleUid: str, grade: int):
+        samples = self.getAllSample()
+
+        currentSample = None
+
+        for sample in samples:
+            if sample.uid == sampleUid:
+                currentSample = sample
+                self.delSample(sample.uid)
+                break
+
+        if currentSample is None:
+            return
+
+        currentSample.grade = grade
+
+        self.createSample(currentSample)
+
+
+    def getAllSamplesByKindUid(self, kindUid: str):
+        groups = self.getAllGroup()
+
+        currentGroups = []
+
+        for group in groups:
+            if group.kindUid == kindUid:
+                currentGroups.append(group.uid)
+
+        samples = self.getAllSample()
+
+        resSample = []
+
+        for sample in samples:
+            if sample.groupUid in currentGroups:
+                resSample.append(sample)
+
+        return resSample
+
+
+    def getData(self, dirName: str):
+        try:
+            with open(dirName, 'r', encoding='utf-8') as f:
+                text = json.load(f)
+        except json.decoder.JSONDecodeError:
+            text = []
+
+        return text
+
+    def setData(self, dirName: str, text: list):
+        with open(dirName, "w") as file:
             file.write(json.dumps(text))
