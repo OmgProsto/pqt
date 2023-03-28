@@ -1,9 +1,9 @@
 import json
 
-DIR_KIND = '/home/user/projects/python/db/files/kind.json'
-DIR_PARAMETERS = '/home/user/projects/python/db/files/parameters.json'
-DIR_GROUP = '/home/user/projects/python/db/files/group.json'
-DIR_SAMPLE = '/home/user/projects/python/db/files/sample.json'
+DIR_KIND = 'kind.json'
+DIR_PARAMETERS = 'parameters.json'
+DIR_GROUP = 'group.json'
+DIR_SAMPLE = 'sample.json'
 
 
 class Kind:
