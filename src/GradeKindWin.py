@@ -37,4 +37,15 @@ class GradeKindWin(QtWidgets.QMainWindow):
         for sample in samples:
             grades += sample.grade
 
-        self.gkm.label.setText("Оценка " + str(math.ceil(grades / allGrades * 100)) + " / 100")
+        resultGrade = math.ceil(grades / allGrades * 100)
+
+        if resultGrade > 80:
+            self.gkm.label.setText("Оценка отлично")
+        elif resultGrade > 60:
+            self.gkm.label.setText("Оценка хорошо")
+        elif resultGrade > 40:
+            self.gkm.label.setText("Оценка удовлетворительно")
+        else:
+            self.gkm.label.setText("Оценка неудовлитворительно")
+
+

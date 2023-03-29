@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 from db.Repository import Repository
 from src.CreateSampleModal import CreateSampleModal
+from src.DeleteSampleModal import DeleteSampleModal
 from src.GradeSampleWin import GradeSampleWin
+from src.PhotoSampleModal import PhotoSampleModal
 from ui.SampleWin import Ui_MainWindow as sw
 
 
@@ -29,6 +31,11 @@ class SampleWin(QtWidgets.QMainWindow):
 
         self.sw.pushButton_2.clicked.connect(self.showGradeModal)
 
+        self.sw.pushButton_3.clicked.connect(self.deleteSampleModal)
+
+        self.sw.pushButton_4.clicked.connect(self.showPhoto)
+
+
     def generateTable(self):
         self.sw.tableWidget.setRowCount(0)
         uidKind = self.sw.comboBox.currentData()
@@ -52,3 +59,11 @@ class SampleWin(QtWidgets.QMainWindow):
     def showGradeModal(self):
         self.gradeSampleWin = GradeSampleWin(self.generateTable)
         self.gradeSampleWin.show()
+
+    def deleteSampleModal(self):
+        self.deleteSampleModal = DeleteSampleModal(self.generateTable)
+        self.deleteSampleModal.show()
+
+    def showPhoto(self):
+        self.showPhotoModal = PhotoSampleModal()
+        self.showPhotoModal.show()

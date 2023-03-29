@@ -61,6 +61,24 @@ class Repository:
 
         self.setData(DIR_KIND, text)
 
+    def delKind(self, uidKind: str):
+        text = self.getAllKinds()
+
+        for index, kind in enumerate(text):
+            if kind.uid == uidKind:
+                del text[index]
+
+        saveData = []
+
+        for k in text:
+            saveData.append({
+                "uid": k.uid,
+                "name": k.name,
+                "is_basic": k.is_basic
+            })
+
+        self.setData(DIR_KIND, saveData)
+
     def getAllParams(self):
         text = self.getData(DIR_PARAMETERS)
 
@@ -85,6 +103,25 @@ class Repository:
 
         self.setData(DIR_PARAMETERS, text)
 
+    def delParam(self, uidParam: str):
+        text = self.getAllParams()
+
+        for index, param in enumerate(text):
+            if param.uid == uidParam:
+                del text[index]
+
+        saveData = []
+
+        for p in text:
+            saveData.append({
+                "uid": p.uid,
+                "kind_uid": p.kindUid,
+                "name": p.name,
+                "is_critical": p.is_critical
+            })
+
+        self.setData(DIR_PARAMETERS, saveData)
+
     def getAllGroup(self):
         text = self.getData(DIR_GROUP)
 
@@ -108,6 +145,25 @@ class Repository:
         })
 
         self.setData(DIR_GROUP, text)
+
+    def delGroup(self, uidGroup: str):
+        text = self.getAllGroup()
+
+        for index, group in enumerate(text):
+            if group.uid == uidGroup:
+                del text[index]
+
+        saveData = []
+
+        for g in text:
+            saveData.append({
+                "uid": g.uid,
+                "kind_uid": g.kindUid,
+                "name": g.name,
+                "is_basic": g.is_basic
+            })
+
+        self.setData(DIR_GROUP, saveData)
 
     def getAllSample(self):
         text = self.getData(DIR_SAMPLE)
@@ -187,7 +243,6 @@ class Repository:
 
         return resultParameters
 
-
     def isParameterCritical(self, parameterUid: str):
         parameters = self.getAllParams()
 
@@ -215,7 +270,6 @@ class Repository:
 
         self.createSample(currentSample)
 
-
     def getAllSamplesByKindUid(self, kindUid: str):
         groups = self.getAllGroup()
 
@@ -234,7 +288,6 @@ class Repository:
                 resSample.append(sample)
 
         return resSample
-
 
     def getData(self, dirName: str):
         try:

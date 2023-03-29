@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 from db.Repository import Repository
 from src.CreateParamModal import CreateParamModal
+from src.DeleteParamModal import DeleteParamModal
 from ui.ParametersWin import Ui_MainWindow as pw
 
 class ParametersWin(QtWidgets.QMainWindow):
@@ -25,6 +26,8 @@ class ParametersWin(QtWidgets.QMainWindow):
 
         self.pw.pushButton.clicked.connect(self.showCreateModal)
 
+        self.pw.pushButton_2.clicked.connect(self.delParam)
+
 
     def generateTable(self):
         self.pw.tableWidget.setRowCount(0)
@@ -46,6 +49,9 @@ class ParametersWin(QtWidgets.QMainWindow):
         self.createKindModal = CreateParamModal(self.generateTable)
         self.createKindModal.show()
 
+    def delParam(self):
+        self.delParamModal = DeleteParamModal(self.generateTable)
+        self.delParamModal.show()
 
 
 

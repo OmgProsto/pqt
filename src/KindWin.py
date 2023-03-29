@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 from db.Repository import Repository
 from src.CreateKindModal import CreateKindModal
+from src.DeleteKindModal import DeleteKindModal
 from ui.KindWindow import Ui_MainWindow as kw
 
 
@@ -18,10 +19,15 @@ class KindWin(QtWidgets.QMainWindow):
         self.generateTable()
 
         self.kw.pushButton.clicked.connect(self.showCreateModal)
+        self.kw.pushButton_2.clicked.connect(self.showDeleteModal)
 
     def showCreateModal(self):
         self.createKindModal = CreateKindModal(self.generateTable)
         self.createKindModal.show()
+
+    def showDeleteModal(self):
+        self.deleteKindModal = DeleteKindModal(self.generateTable)
+        self.deleteKindModal.show()
 
     def generateTable(self):
         kinds = self.repo.getAllKinds()

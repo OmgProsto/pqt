@@ -32,6 +32,7 @@ class GradeSampleWin(QtWidgets.QMainWindow):
         parameters = self.repo.getParametersBySampleUid(uidSample)
 
         self.radioButtonsDict = {}
+        self.additinalDict = {}
 
         self.gsw.tableWidget.setRowCount(len(parameters))
         curRow = 0
@@ -42,15 +43,26 @@ class GradeSampleWin(QtWidgets.QMainWindow):
 
             self.radioButtonsDict[parameter.uid] = radio_button
 
+            radio_button_addit = QCheckBox()
+            radio_button_addit.setGeometry(10, 0, 20, 20)
+            radio_button_addit.setText('Не учитывается')
+
+            self.additinalDict[parameter.uid] = radio_button_addit
+
             self.gsw.tableWidget.setItem(curRow, 0, QTableWidgetItem(parameter.name))
             self.gsw.tableWidget.setCellWidget(curRow, 1, radio_button)
+            self.gsw.tableWidget.setCellWidget(curRow, 2, radio_button_addit)
             curRow += 1
 
     def save(self):
 
         currentAnswerYes = 0
+        countAllAnswer = 0
 
         for key, value in self.radioButtonsDict.items():
+            if self.additinalDict.get(key).isChecked():
+                continue
+
             if self.repo.isParameterCritical(key) and value.isChecked() == False:
                 self.repo.updateGradeSample(self.gsw.comboBox.currentData(), 2)
                 self.generateTableSample()
@@ -60,7 +72,13 @@ class GradeSampleWin(QtWidgets.QMainWindow):
             if value.isChecked():
                 currentAnswerYes += 1
 
-        persentYesAnswer = currentAnswerYes / len(self.radioButtonsDict) * 100
+            countAllAnswer += 1
+
+        if countAllAnswer == 0:
+            self.hide()
+            return
+
+        persentYesAnswer = currentAnswerYes / countAllAnswer * 100
 
         if persentYesAnswer > 80:
             self.repo.updateGradeSample(self.gsw.comboBox.currentData(), 5)

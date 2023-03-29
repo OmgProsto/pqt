@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 from db.Repository import Repository
 from src.CreateGroupModal import CreateGroupModal
+from src.DeleteGroupModal import DeleteGroupModal
 from ui.GroupWindow import Ui_MainWindow as gw
 
 from PyQt5 import QtWidgets
@@ -26,6 +27,7 @@ class GroupWin(QtWidgets.QMainWindow):
         self.gw.comboBox.activated.connect(self.generateTable)
 
         self.gw.pushButton.clicked.connect(self.showCreateModal)
+        self.gw.pushButton_2.clicked.connect(self.delGroup)
 
     def generateTable(self):
         self.gw.tableWidget.setRowCount(0)
@@ -48,3 +50,6 @@ class GroupWin(QtWidgets.QMainWindow):
         self.createModal = CreateGroupModal(self.generateTable)
         self.createModal.show()
 
+    def delGroup(self):
+        self.deleteGroupModal = DeleteGroupModal(self.generateTable)
+        self.deleteGroupModal.show()
